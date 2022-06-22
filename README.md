@@ -1,7 +1,9 @@
-# PF Accsessories
+## PF Accsessories
 Informal phylofisher related scripts
-
-prep_new_db.py
+  
+# prep_new_db.py  
+```
+$ prep_new_db.py -h
 usage: prep_new_db.py [-h] -t TAXA_LIST -d MASTER_DB -o OUT_DIR
 
 Prepares files for new database creation from subset of main database taxa
@@ -17,3 +19,4 @@ required arguments:
   -o OUT_DIR, --out_dir OUT_DIR
                         Path to location where output directory for new
                         database files will be made
+```
