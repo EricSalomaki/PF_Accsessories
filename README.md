@@ -1,7 +1,7 @@
-## PF Accsessories
+# PF Accsessories
 Informal phylofisher related scripts
   
-# prep_new_db.py  
+### prep_new_db.py  
 ```
 $ prep_new_db.py -h
 usage: prep_new_db.py [-h] -t TAXA_LIST -d MASTER_DB -o OUT_DIR
