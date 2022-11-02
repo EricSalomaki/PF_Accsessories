@@ -16,8 +16,6 @@ def select_taxa(taxalist):
 
 	return lines
 
-# get masterDB path
-
 #Make output directories
 def outputs(masterout):
 	outdir = masterout + "/new_database"
