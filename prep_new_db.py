@@ -4,6 +4,7 @@ import glob
 from Bio import SeqIO
 import shutil
 import argparse
+import tarfile
 
 def select_taxa(taxalist):
 ## Open Taxa list for new DB
@@ -21,7 +22,7 @@ def outputs(masterout):
 	outdir = masterout + "/new_database"
 	orthooutdir = outdir + "/orthologs"
 	paraoutdir = outdir + "/paralogs"
-	protoutdir = outdir + "/proteomes
+	protoutdir = outdir + "/proteomes"
 	try:
 		os.mkdir(masterout)
 		print(masterout + " created")
@@ -118,12 +119,25 @@ def make_metadata(masterdbpath, outdir, lines):
 			metaout.write(line + '\n')
 	metaout.close
 
+#Optional Compress Output
+def compress(masterout):
+	if args.compress == 'yes':
+		tarout = masterout + ".tar.gz"
+		tar = tarfile.open(tarout, "w:gz")
+		tar.add(masterout)
+		tar.close()
+		shutil.rmtree(masterout)
+	else:
+		pass	
+	
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Prepares files for new database creation from subset of main database taxa')
 	required = parser.add_argument_group('required arguments')
+	optional = parser.add_argument_group('optional arguments')
 	required.add_argument('-t', '--taxa_list', type = str, help = 'List of taxa as unique IDs to include in new database', required=True)
 	required.add_argument('-d', '--master_db', type = str, help = 'Path to master phylofisher database', required = True)
 	required.add_argument('-o', '--out_dir', type = str, help = 'Path to location where output directory for new database files will be made', required = True)
+	optional.add_argument('-z', '--compress', type = str, help = 'Create tar.gz compressed output instead of uncompressed', choices = ['yes', 'no'], default= 'no')
 
 	args=parser.parse_args()
 
@@ -137,3 +151,4 @@ if __name__ == '__main__':
 	make_new_paras(masterdbpath, paraoutdir, lines)
 	make_new_prots(masterdbpath, protoutdir, lines)
 	make_metadata(masterdbpath, outdir, lines)
+	compress(masterout)
