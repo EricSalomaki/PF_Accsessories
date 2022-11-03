@@ -68,7 +68,7 @@ def make_new_orthos(masterdbpath, orthooutdir, lines):
 		with open(orthooutdir + "/" + fname, "w") as outfasta:
 			for record in fasta:
 				for line in lines:
-					if line in record.id:
+					if line == record.id:
 						keep.append(record)
 						SeqIO.write(record, outfasta, "fasta")
 					else:
@@ -86,7 +86,7 @@ def make_new_paras(masterdbpath, paraoutdir, lines):
 		with open(paraoutdir + "/" + fname, "w") as outfasta:
 			for record in fasta:
 				for line in lines:
-					if line in record.id:
+					if line == record.id:
 						keep.append(record)
 						SeqIO.write(record, outfasta, "fasta")
 					else:
