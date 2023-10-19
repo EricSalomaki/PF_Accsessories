@@ -85,8 +85,9 @@ def make_new_paras(masterdbpath, paraoutdir, lines):
 		print(fname)
 		with open(paraoutdir + "/" + fname, "w") as outfasta:
 			for record in fasta:
+				p = record.id.split('..')[0]
 				for line in lines:
-					if line == record.id:
+					if line == p:
 						keep.append(record)
 						SeqIO.write(record, outfasta, "fasta")
 					else:
