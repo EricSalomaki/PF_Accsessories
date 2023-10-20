@@ -113,8 +113,10 @@ def make_metadata(masterdbpath, outdir, lines):
 	for mline in mlines:
 		uniqid = mline.split('\t')[0]
 		for line in lines:
-			if line == uniqid:
+			if line == uniqid and mline not in newmd:
 				newmd.append(mline)
+			else:
+				pass
 	with open(outdir + '/metadata.tsv', 'w') as metaout:
 		for line in newmd:
 			metaout.write(line + '\n')
